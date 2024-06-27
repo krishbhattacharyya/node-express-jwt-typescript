@@ -18,31 +18,31 @@ Address.belongsTo(User, {
 })
 
 // User association with profile- one to one
-User.hasOne(Profile, {
+Profile.hasOne(User, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE'
 })
-Profile.belongsTo(User, {
+User.belongsTo(Profile, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE'
 })
 
 // User association with role- one to many
-User.hasMany(Role, {
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+User.belongsToMany(Role, {
+  through: 'usersrole',
+  timestamps: false
 })
-Role.belongsTo(User, {
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+Role.belongsToMany(User, {
+  through: 'usersrole',
+  timestamps: false
 })
 
 // Address association with country- one to one
-Address.hasOne(Country, {
+Country.hasOne(Address, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE'
 })
-Country.belongsTo(Address, {
+Address.belongsTo(Country, {
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE'
 })
@@ -59,10 +59,12 @@ Capital.belongsTo(Country, {
 
 // User association with product- many to many
 User.belongsToMany(Product, {
-  through: 'userproduct'
+  through: 'usersproduct',
+  timestamps: false
 })
 Product.belongsToMany(User, {
-  through: 'userproduct'
+  through: 'usersproduct',
+  timestamps: false
 })
 
 async function initModels() {

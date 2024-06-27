@@ -3,7 +3,7 @@ import { sequelizeConnection } from '../database/index'
 import bcrypt from 'bcrypt'
 
 const User = sequelizeConnection.define(
-  'user',
+  'users',
   {
     firstName: {
       type: DataType.STRING
@@ -25,6 +25,9 @@ const User = sequelizeConnection.define(
     },
     acitvated_user: {
       type: DataType.BOOLEAN
+    },
+    acitvate_code: {
+      type: DataType.STRING
     },
     password: {
       type: DataType.STRING

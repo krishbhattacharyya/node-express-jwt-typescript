@@ -53,10 +53,13 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "raw-body": "^2.5.2",
     "sequelize": "^6.37.3",
-    "winston": "^3.13.0"
+    "winston": "^3.13.0",
+    "xlsx": "^0.18.5"
   }
 }

@@ -4,7 +4,7 @@ import { sequelizeConnection } from '../database/index'
 const Country = sequelizeConnection.define(
   'country',
   {
-    country_mame: {
+    country_name: {
       type: DataType.STRING,
       allowNull: false,
       unique: true

@@ -1,19 +1,6 @@
 import { Router, Request, Response } from 'express'
 
-// Contrlers keep our logic seperate than actual routes
-import authController from '../controllers/authControllers'
-
 const router = Router()
-
-router.post('/signup', (req: Request, res: Response) => authController.signup_post(req, res))
-
-router.post('/login', (req: Request, res: Response) => authController.login_post(req, res))
-
-router.post('/refreshtoken', (req: Request, res: Response) => authController.refreshtoken_post(req, res))
-
-router.get('/logout', (req: Request, res: Response) => authController.logout_get(req, res))
-
-// Bellow code just for experiment
 router.get('/setcookies', (req: Request, res: Response) => {
   // Just development purpose
   res.status(201)
