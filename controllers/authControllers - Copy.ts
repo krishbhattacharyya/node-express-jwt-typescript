@@ -75,6 +75,71 @@ async function logout_get(req: any, res: Response) {
   }
 }
 
+async function insertAddress(address: any, userObj: any) {
+  try {
+    const addressInsert: any = await Address.create({
+      line_one: 'line_one' in address ? address.line_one : null,
+      line_two: 'line_two' in address ? address.line_two : null,
+      line_three: 'line_three' in address ? address.line_three : null,
+      city: 'city' in address ? address.city : null,
+      state: 'state' in address ? address.state : null,
+      postal_code: 'postal_code' in address ? address.postal_code : null,
+      userId: userObj.id
+    })
+    console.log(addressInsert.id)
+  } catch (err: any) {
+    console.log(err)
+    throw new Error(err)
+  }
+}
+
+async function insertProfile(profile: any, userObj: any) {
+  try {
+    const addressInsert: any = await Profile.create({
+      age: 'age' in profile ? profile.age : null,
+      profileName: 'profileName' in profile ? profile.profileName : null,
+      profileDescription: 'profileDescription' in profile ? profile.profileDescription : null,
+      profilePic: 'profilePic' in profile ? profile.profilePic : null,
+      userId: userObj.id
+    })
+  } catch (err: any) {
+    throw new Error(err)
+  }
+}
+
+// Generate refresh token and send back to user
+async function user_put(req: any, res: Response) {
+  try {
+    const user = req.user
+    const address = 'address' in req.body ? req.body.address : null
+    const profile = 'profile' in req.body ? req.body.profile : null
+    if (user) {
+      const userObj = await User.findOne({ where: { id: user.id } })
+      if (address && profile && userObj) {
+        await insertAddress(address, userObj)
+        await insertProfile(profile, userObj)
+        console.log('aaaaaaaaaaaaaaaaaa')
+        return res.status(200).json({ message: 'Successfully address and profile updated' })
+      } else if (address && userObj) {
+        console.log('bbbbbbbbb')
+        await insertAddress(address, userObj)
+        return res.status(200).json({ message: 'Successfully address updated' })
+      } else if (profile && userObj) {
+        console.log('ccccccccccc')
+        await insertProfile(profile, userObj)
+        return res.status(200).json({ message: 'Successfully profile updated' })
+      } else {
+        return res.status(400).send('Please connect to use')
+      }
+    } else {
+      return res.status(403).json({ error: 'User not valid!' })
+    }
+  } catch (err) {
+    console.log('err=========================111')
+    return res.status(403).json({ error: err })
+  }
+}
+
 // Generate refresh token and send back to user
 async function refreshtoken_post(req: any, res: Response) {
   const token = req.body.token
@@ -93,4 +158,4 @@ async function refreshtoken_post(req: any, res: Response) {
   }
 }
 
-export default { signup_post, login_post, logout_get, refreshtoken_post }
+export default { signup_post, login_post, logout_get, refreshtoken_post, user_put }

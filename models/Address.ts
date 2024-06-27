@@ -5,22 +5,27 @@ const Address = sequelizeConnection.define(
   'address',
   {
     line_one: {
-      type: DataType.INTEGER
+      type: DataType.STRING,
+      allowNull: true
     },
     line_two: {
-      type: DataType.INTEGER
+      type: DataType.STRING,
+      allowNull: true
     },
     line_three: {
-      type: DataType.INTEGER
+      type: DataType.STRING,
+      allowNull: true
     },
     city: {
-      type: DataType.STRING
+      type: DataType.STRING,
+      allowNull: true
     },
     state: {
-      type: DataType.STRING
+      type: DataType.STRING,
+      allowNull: true
     },
     postal_code: {
-      type: DataType.STRING
+      type: DataType.INTEGER
     }
   },
   {

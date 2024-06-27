@@ -13,6 +13,8 @@ import rootRoutes from './routes/index'
 
 import { initModels } from './models'
 
+import { initController } from './controllers/initController'
+
 export const app: Express = express()
 
 dotenv.config()
@@ -63,6 +65,9 @@ const initApp = async () => {
 
     // Creating tables in database
     await initModels()
+
+    // Insert data in database
+    await initController()
   } catch (err) {
     console.error('Unable to connect to the database:', err)
   }

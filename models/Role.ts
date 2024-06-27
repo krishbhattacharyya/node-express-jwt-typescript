@@ -6,9 +6,10 @@ import { RoleType } from '../types/defaultenumtype'
 const Role = sequelizeConnection.define(
   'roles',
   {
-    role_mame: {
+    role_name: {
       type: DataType.STRING,
-      defaultValue: RoleType.anonymous
+      allowNull: false,
+      unique: true
     }
   },
   {
