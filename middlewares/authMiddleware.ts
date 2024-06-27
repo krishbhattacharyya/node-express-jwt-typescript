@@ -7,7 +7,7 @@ interface TRequest extends Request {
 }
 
 const checkCurrentUser = (req: TRequest, res: Response, next: NextFunction) => {
-  if (req.url === '/auth/logout') return next()
+  if (req.url === '/auth/signup' || req.url === '/auth/login' || req.url === '/auth/refreshtoken') return next()
   const authHeader = req.headers['authorization']
   const token = authHeader && (authHeader as string).split(' ')[1]
   if (token) {

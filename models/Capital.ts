@@ -4,7 +4,7 @@ import { sequelizeConnection } from '../database/index'
 const Capital = sequelizeConnection.define(
   'capital',
   {
-    capital_mame: {
+    capital_name: {
       type: DataType.STRING,
       allowNull: false,
       unique: true
